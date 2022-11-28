@@ -50,7 +50,7 @@ export default {
       Vue.notify({
         group: "foo",
         text: payload.data,
-        duration: -1,
+        duration: 2000,
         type: payload.type,
         position: "top right",
       });
