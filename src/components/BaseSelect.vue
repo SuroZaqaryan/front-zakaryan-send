@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="exampleText0" class="form-label font-medium text-gray-700">{{label}}</label>
+    <label class="form-label font-medium text-gray-700">{{label}}</label>
     <select
         @change="$emit('update', $event.target.value)"
         class="form-select appearance-none block w-full mt-1 px-3 py-2 text-base font-normal text-Neutral-900 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 "
@@ -8,10 +8,10 @@
       <option
           v-for="opt in options"
           :key="opt.id"
-          :value="opt.name"
-          :selected="value === opt.name"
+          :value="opt.id"
+          :selected="value === opt.id"
       >
-        {{ opt.name || 'No label' }}
+        {{ opt.name || 'Нету опций' }}
       </option>
     </select>
   </div>
@@ -29,7 +29,6 @@ export default {
       required: true
     },
     value: {
-      type: String,
       required: true
     },
   },

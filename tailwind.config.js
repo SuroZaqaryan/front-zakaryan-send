@@ -15,8 +15,6 @@ module.exports = {
 
         // Fonts
         extend: {
-
-
             fontFamily: {
                 body: ['Inter']
             },
@@ -39,7 +37,9 @@ module.exports = {
             green: {
                 default: '#16A34A',
                 dark: '#15803d',
-            }
+            },
+
+            'gray-opacity': '#6b7280bf',
         },
     },
 
@@ -47,9 +47,7 @@ module.exports = {
         extend: {},
     },
 
-    content: ['./src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
+    content: [],
 
-    plugins: [
-        require('tw-elements/dist/plugin')
-    ]
+    plugins: []
 }

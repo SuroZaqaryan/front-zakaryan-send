@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import store from "./store";
 import App from './App.vue'
-import 'tw-elements';
-
 import './assets/styles/tailwind.css';
 import './assets/styles/inputs.css';
 
-Vue.config.productionTip = false
+import Notifications from "vue-notification";
+Vue.use(Notifications);
 
 new Vue({
   store,

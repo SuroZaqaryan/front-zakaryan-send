@@ -1,29 +1,52 @@
-import { getField, updateField } from "vuex-map-fields";
+import {getField, updateField} from "vuex-map-fields";
+import api from "@/api/api"
+import Vue from 'vue'
 
 export default {
     state: {
-
         form: {
             phone: '',
             name: '',
             email: '',
-            country: ""
+            city_id: ''
         },
 
         countries: [
-            {id: 1, name: ' Москва '},
-            {id: 2, name: ' Санкт - Петербург '},
-            {id: 3, name: ' Казань '},
+            {id: 1, name: 'Москва'},
+            {id: 2, name: 'Санкт - Петербург'},
+            {id: 3, name: 'Казань'},
         ],
     },
 
-    actions: {},
+    actions: {
+        checkCountry: ({commit}, payload) => commit("CHECK_COUNTRY", payload),
+
+        send({commit}, payload) {
+            api.post('/test-tasks/front/task-7/', payload).then((res) => {
+                commit("VALIDATE", {data: res.data, type: 'success'})
+            }).catch((err) => {
+                commit("VALIDATE", {data: err.response.data, type: 'warn'})
+            });
+        },
+    },
 
     mutations: {
         updateField,
 
-        send(state) {
-            console.log(state);
+        CHECK_COUNTRY(state, payload) {
+            state.countries.find(elem => {
+                if (elem.name === payload) state.form.city_id = elem.id
+            })
+        },
+
+        VALIDATE(state, payload) {
+            Vue.notify({
+                group: "foo",
+                text: payload.data,
+                duration: -1,
+                type: payload.type,
+                position: 'top right'
+            })
         }
     },
 

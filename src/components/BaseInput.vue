@@ -15,7 +15,11 @@ const includes = types => type => types.includes(type);
 
 export default {
   inheritAttrs: false,
+
   props: {
+    disabled: {
+      type: Boolean
+    },
     label: {
       type: String,
       default: ""
@@ -31,20 +35,25 @@ export default {
         const isValid = includes(TYPES)(value);
         if (!isValid) {
           // eslint-disable-next-line
-          console.warn(`allowed types are ${TYPES}`);
+          console.warn(`Допустимые типы - ${TYPES}`);
         }
         return isValid;
       }
     },
+    maxlength: {
+      default: 30,
+    },
     placeholder: {
       type: String,
-      default: "",
+      default: "30",
+      required: false,
     }
   },
+
   model: {
     prop: "value",
     event: "update"
-  }
+  },
 };
 </script>
 
@@ -52,6 +61,7 @@ export default {
   <div class="sm:mt-5">
     <label for="exampleText0" class="form-label font-medium text-gray-700">{{label}}</label>
     <input
+        :maxlength="maxlength"
         :type="type"
         v-on="$listeners"
         :value="value"
